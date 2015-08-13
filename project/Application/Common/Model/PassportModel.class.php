@@ -15,14 +15,14 @@ class PassportModel extends Model {
         $rs = $this->getRow($filter);
         $res = array();
         if (!$rs) {
-            $res = array('status' => 'fail', 'msg' => 'user_not_exists');
+            $res = array('status' => 'fail', 'msg' => 'passport_not_exists');
         }
         else {
-            if ($rs['password'] != $this->_getPassword($password, $rs['salt'])) {
+            if ($rs['password'] != $this->_genPassword($password, $rs['salt'])) {
                 $res = array('status' => 'fail', 'msg' => 'password_error');
             }
             elseif (1 == $rs['disabled']) {
-                $res = array('status' => 'fail', 'msg' => 'user_blocked');
+                $res = array('status' => 'fail', 'msg' => 'passport_blocked');
             }
             else {
                 $res = array('status' => 'success', 'data' => array('passport' => $rs));
@@ -79,13 +79,13 @@ class PassportModel extends Model {
         return $salt;
     }
 
-    public function findByUserid($userid) {
-        $filter = array('user_id' => $userid);
+    public function findByPassportid($passportid) {
+        $filter = array('passport_id' => $passportid);
         $passport = $this->where($filter)->find();
         return $passport;
     }
 
-    public function changePassword($username, $password) {
+    public function changePassword($passportname, $password) {
         return $res;
     }
 

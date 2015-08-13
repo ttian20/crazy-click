@@ -5,6 +5,8 @@ $common = array(
     'ENV' => 'DEV',
 
     'URL_MODEL' => 2,
+    'URL_CASE_INSENSITIVE' => true,
+    'URL_CASE_INSENSITIVES' => true,
     'URL_HTML_SUFFIX' => '',
 
     'LOG_RECORD' => false,
@@ -31,6 +33,8 @@ $common = array(
             'bucket' => 'yunmao-pic',
         ),
     ),
+
+    'PAGE_LIMIT' => 10,
 );
 
 return array_merge($common, $conf);

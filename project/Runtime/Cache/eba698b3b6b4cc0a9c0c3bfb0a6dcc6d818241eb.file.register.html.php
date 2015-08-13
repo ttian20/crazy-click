@@ -1,25 +1,25 @@
-<?php /* Smarty version Smarty-3.1.6, created on 2015-07-23 10:54:43
+<?php /* Smarty version Smarty-3.1.6, created on 2015-08-11 14:42:47
          compiled from "/data/httpd/crazyclick/cc/project/Application/Home/View/Index/register.html" */ ?>
-<?php /*%%SmartyHeaderCode:1265116184559ab13942f073-06404467%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:117772402855c9996779f547-92157034%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'eba698b3b6b4cc0a9c0c3bfb0a6dcc6d818241eb' => 
     array (
       0 => '/data/httpd/crazyclick/cc/project/Application/Home/View/Index/register.html',
-      1 => 1437620076,
+      1 => 1437620538,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1265116184559ab13942f073-06404467',
+  'nocache_hash' => '117772402855c9996779f547-92157034',
   'function' => 
   array (
   ),
-  'version' => 'Smarty-3.1.6',
-  'unifunc' => 'content_559ab13948107',
   'has_nocache_code' => false,
+  'version' => 'Smarty-3.1.6',
+  'unifunc' => 'content_55c99967817fb',
 ),false); /*/%%SmartyHeaderCode%%*/?>
-<?php if ($_valid && !is_callable('content_559ab13948107')) {function content_559ab13948107($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php if ($_valid && !is_callable('content_55c99967817fb')) {function content_55c99967817fb($_smarty_tpl) {?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -145,7 +145,7 @@ $(function(){
             }
             else {
                 if (result.data.redirect_url) {
-                    location.href = result.data.result;
+                    location.href = result.data.redirect_url;
                 }
             }
         }, "json");

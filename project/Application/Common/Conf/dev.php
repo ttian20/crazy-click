@@ -11,6 +11,8 @@ $conf = array(
     'DB_PREFIX' => '', // 数据库表前缀
     'DB_CHARSET' => 'utf8', // 数据库编码默认采用utf8
 
+    'URL_CASE_INSENSITIVE' => true,
+
 /*
     //mongo config
     'MONGO_CONFIG' => array(
