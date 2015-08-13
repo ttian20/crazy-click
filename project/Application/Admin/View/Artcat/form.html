@@ -1,0 +1,47 @@
+<{extends '../Layouts/default.html'}>
+            <{block 'content'}> 
+            <div class="span3">
+                <{include file="../Common/sidebar_nav.html"}>
+            </div>
+            <div class="span9">
+                <h1 class="page-title"><{if $act eq 'add'}>添加<{else}>编辑<{/if}>文章分类</h1>
+                <div class="well">
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane active in" id="home">
+                            <form id="artcat">
+                                <label>类型名称</label>
+                                <input type="text" name="catname" id="catname" class="input-xlarge" value="<{$cat.catname}>">
+                                <input type="hidden" name="act" value="<{$act}>">
+                                <{if $act eq 'edit'}><input type="hidden" name="catid" value="<{$cat.id}>"><{/if}>
+                                <div> <button class="btn btn-primary" type="submit"><i class="icon-save"></i> 保存</button></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <{/block}>
+
+<{block 'footer_script'}>
+<script type="text/javascript">
+$(function(){
+    $('#artcat').submit(function(e){
+        e.preventDefault();
+        if ($('#catname').val() == '') {
+            alert('类型名称不能为空');
+        }
+        else {
+            $.post("/artcat/save", $("#artcat").serialize(), function(result){
+                if ('fail' == result.status) {
+                    alert(result.msg);
+                }
+                else {
+                    if (result.data.redirect_url) {
+                        location.href = result.data.redirect_url;
+                    }
+                }
+            }, "json");
+        }
+    });
+});
+</script>
+<{/block}>

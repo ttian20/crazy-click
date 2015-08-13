@@ -1,0 +1,38 @@
+        <div class="sidebar-nav">
+            <{*
+            <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu"><i class="icon-dashboard"></i>Dashboard</div>
+            <ul id="dashboard-menu" class="nav nav-list collapse in">
+                <li><a href="index.html">Home</a></li>
+                <li ><a href="users.html">Sample List</a></li>
+                <li ><a href="user.html">Sample Item</a></li>
+                <li ><a href="gallery.html">Gallery</a></li>
+                <li ><a href="calendar.html">Calendar</a></li>
+                <li ><a href="faq.html">Faq</a></li>
+                <li ><a href="help.html">Help</a></li>
+            </ul>
+            *}>
+            <div class="nav-header" data-toggle="collapse" data-target="#articles-menu"><i class="icon-briefcase"></i>文章<span class="label label-info">+10</span></div>
+            <ul id="articles-menu" class="nav nav-list collapse in">
+              <li<{if $controllerName eq 'artcat'}> class="active"<{/if}>><a href="/artcat">文章分类</a></li>
+              <li<{if $controllerName eq 'article'}> class="active"<{/if}>><a href="/article">文章列表</a></li>
+            </ul>
+
+            <div class="nav-header" data-toggle="collapse" data-target="#products-menu"><i class="icon-briefcase"></i>商品<span class="label label-info">+10</span></div>
+            <ul id="products-menu" class="nav nav-list collapse in">
+              <li<{if $controllerName eq 'product'}> class="active"<{/if}>><a href="/product">商品列表</a></li>
+            </ul>
+
+            <div class="nav-header" data-toggle="collapse" data-target="#settings-menu"><i class="icon-exclamation-sign"></i>Error Pages</div>
+            <ul id="settings-menu" class="nav nav-list collapse in">
+              <li ><a href="403.html">403 page</a></li>
+              <li ><a href="404.html">404 page</a></li>
+              <li ><a href="500.html">500 page</a></li>
+              <li ><a href="503.html">503 page</a></li>
+            </ul>
+
+            <div class="nav-header" data-toggle="collapse" data-target="#legal-menu"><i class="icon-legal"></i>Legal</div>
+            <ul id="legal-menu" class="nav nav-list collapse in">
+              <li ><a href="privacy-policy.html">Privacy Policy</a></li>
+              <li ><a href="terms-and-conditions.html">Terms and Conditions</a></li>
+            </ul>
+        </div>

@@ -1,0 +1,62 @@
+<{extends '../Layouts/default.html'}>
+            <{block 'content'}>
+            <div class="span3">
+                <{include file="../Common/sidebar_nav.html"}>
+            </div>
+            <div class="span9">
+                <h1 class="page-title">文章分类</h1>
+                <div class="btn-toolbar">
+                    <a href="/artcat/add" class="btn btn-primary"><i class="icon-plus"></i> 添加新分类</a>
+                    <div class="btn-group"> </div>
+                </div>
+<div class="well">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>分类名称</th>
+          <th style="width: 26px;"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <{foreach item=cat from=$artcats}>
+        <tr>
+          <td><{$cat.catname}></td>
+          <td>
+              <a href="/artcat/edit/<{$cat.id}>"><i class="icon-pencil"></i></a>
+              <a href="#myModal" role="button" data-toggle="modal"><i class="icon-remove"></i></a>
+          </td>
+        </tr>
+        <{/foreach}>
+      </tbody>
+    </table>
+</div>
+<{$page}>
+<{*
+<div class="pagination">
+    <ul>
+        <li><a href="#">Prev</a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">Next</a></li>
+    </ul>
+</div>
+*}>
+
+<div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Delete Confirmation</h3>
+    </div>
+    <div class="modal-body">
+        <p class="error-text"><i class="icon-warning-sign modal-icon"></i>Are you sure you want to delete the user?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-danger" data-dismiss="modal">Delete</button>
+    </div>
+</div>
+
+        </div>
+        <{/block}>
