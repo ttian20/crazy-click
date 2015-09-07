@@ -58,7 +58,7 @@ class Utils
    }
 
    public static function log($type, $filename, $data) {
-        $path = ROOT_PATH . 'logs/' . $type;
+        $path = RUNTIME_PATH . 'Logs/' . $type;
         if (!is_dir($path)) {
             @mkdir($path, 0777, true);
         }   

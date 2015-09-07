@@ -35,6 +35,22 @@ $common = array(
     ),
 
     'PAGE_LIMIT' => 10,
+
+    'ALIPAY_CONFIG' => array(
+        'partner' => '2088411553059153',
+        'seller_email' => '13641907392@163.com',
+        'key' => 'u9hyo0kjybwil2bdboq0k840iipinfin',
+        'sign_type' => 'MD5', 
+        'input_charset' => 'utf-8',
+        'cacert' => getcwd().'\\cacert.pem', 
+        'transport' => 'http',
+    ),
+
+    'ALIPAY_SETTING' => array(
+        'payment_type' => '1',
+        'notify_url' => 'http://pay.shopflow.cn/alipay/notify',
+        'return_url' => 'http://pay.shopflow.cn/alipay/back',
+    ),
 );
 
 return array_merge($common, $conf);
