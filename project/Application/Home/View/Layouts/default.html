@@ -2,35 +2,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>index</title>
+<title>流量云</title>
 <link href="/src/css/public.css" rel="stylesheet" type="text/css" />
+<{block 'style'}>
+<{/block}>
 <script type="text/javascript" src="/src/js/jquery-1.7.1.min.js"></script>
 <script type="text/javascript" src="/src/js/jquery.caroufredsel-6.0.4-packed.js" ></script>
 <script type="text/javascript" src="/src/js/tankuan.js" ></script>
+<{block 'header_script'}>
+<{/block}>
 </head>
 
 <body>
-  <div class="top width_max"><div class="width_thousand">
-    <dl><li><a href="" class="gay">登录</a>-<a href="/register" class="gay">注册</a></li><li class="myself"><a href="" class="gay">我的流量宝</a></li><li><a href="" class="gay">帮助中心</a></li></dl>
-    <dt>2015年5月25日</dt>
-  </div></div>
-  <div class="header width_max"><div class="width_thousand">
-    <div class="nav_index"><li><a href="" class="blue_01">API接入</a></li><li><a href="" class="blue_01">代理商招募</a></li></div>
-    <div class="logo"><a href=""></a></div>
-    <div class="kouhao">专业流量提供商</div>
-  </div></div>
-  
-  <div class="banner width_max"><div class="width_thousand">
-    <div class="login">
-      <li><span>用户名：</span><input name="" type="text" style="width:200px;border:none;background:#fff;height:30px;font-size:14px; line-height:30px;"/></li>
-      <li><span>密   码 ：</span><input name="" type="text" style="width:200px;border:none;background:#fff;height:30px;font-size:14px; line-height:30px;"/></li>
-      <li><input name="" type="button" value="" style="border:none;background:url(/src/images/btn001.jpg) no-repeat;width:260px;height:50px; cursor:pointer;" /></li>
-      <li style="text-align:right;font-size:12px;padding-top:10px;"><a href="/register" class="white">注册账号</a>｜<a href="/forget" class="white">忘记密码？</a></li>
-    </div>
-  </div></div>
-  
-  <div class="footer width_max">Copyright©2010-2014 liuliangbao.cn All Rights Reserved. 流量云 - 浙ICP备12019862号<br /> 
-<a href="">联系我们</a> - <a href="">加入我们</a> - <a href="">问题反馈</a> - <a href="">关于我们</a> - <a href="">免费刷流量软件</a> - <a href="">免费刷Alexa排名</a> - <a href="">QQ空间刷人气</a></div>
+  <{include file="../Common/header.html"}>
+  <{block 'content'}>
+  <{/block}>
+  <{include file="../Common/footer.html"}>
+
 
 <!--弹框开始-->
   <div id="screen"></div><!--screen end-->
