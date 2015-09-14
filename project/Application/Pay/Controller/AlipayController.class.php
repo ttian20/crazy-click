@@ -16,23 +16,11 @@ class AlipayController extends CommonController {
 
     public function pay() {
         $alipay_config = C('ALIPAY_CONFIG');
-        $out_trade_no = $_POST['WIDout_trade_no'];
-        $subject = $_POST['WIDsubject'];
-        //必填
-        //付款金额
-        $total_fee = $_POST['WIDtotal_fee'];
-        //必填
-        //订单描述
-        $body = $_POST['WIDbody'];
-        //商品展示地址
-        $show_url = $_POST['WIDshow_url'];
-        //需以http://开头的完整路径，例如：http://www.商户网址.com/myorder.html
         //防钓鱼时间戳
         $anti_phishing_key = "";
         //若要使用请调用类文件submit中的query_timestamp函数
         //客户端的IP地址
-        $exter_invoke_ip = "";
-
+        $exter_invoke_ip = $_SERVER["REMOTE_ADDR"]; 
         //构造要请求的参数数组，无需改动
         $parameter = array(
         	"service" => "create_direct_pay_by_user",
@@ -41,13 +29,13 @@ class AlipayController extends CommonController {
         	"payment_type" => C('ALIPAY_SETTING.payment_type'),
         	"notify_url" => C('ALIPAY_SETTING.notify_url'),
         	"return_url" => C('ALIPAY_SETTING.return_url'),
-        	"out_trade_no" => trim($_POST['WIDout_trade_no']),
-        	"subject" => trim($_POST['WIDsubject']),
-        	"total_fee"	=> trim($_POST['WIDtotal_fee']),
-        	"body" => trim($_POST['WIDbody']),
-        	"show_url" => trim($_POST['WIDshow_url']),
-        	"anti_phishing_key"	=> '',
-        	"exter_invoke_ip" => '',
+        	"out_trade_no" => trim($_POST['out_trade_no']),
+        	"subject" => trim($_POST['subject']),
+        	"total_fee"	=> trim($_POST['total_fee']),
+        	"body" => trim($_POST['body']),
+        	"show_url" => trim($_POST['show_url']),
+        	"anti_phishing_key"	=> $anti_phishing_key,
+        	"exter_invoke_ip" => $exter_invoke_ip,
         	"_input_charset" => $alipay_config['input_charset']
         );
 

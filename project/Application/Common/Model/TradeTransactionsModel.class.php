@@ -27,4 +27,30 @@ class TradeTransactionsModel extends Model {
         return $amount;
     }
 
+    public function createNew($params) {
+        $current = time();
+        $data = array(
+            'trans_id' => $this->_genTradeTransactionId(),
+            'trade_id' => $params['trade_id'],
+            'passport_id' => $params['passport_id'],
+            'kind' => $params['kind'],
+            'amount' => $params['amount'],
+            'status' => $params['status'],
+            'created_at' => isset($params['created_at']) ? $params['created_at'] : $current,
+            'updated_at' => isset($params['updated_at']) ? $params['updated_at'] : $current,
+        );
+
+        $res = $this->add($data); 
+        if ($res) {
+            $data['id'] = $res;
+        }
+        return $data;
+    }
+
+    private function _genTradeTransactionId() {
+        $date = date("Ymd");
+        $microseconds = floor(microtime(true) * 1000);
+        $id = 'ali' . $date . $microseconds;
+        return $id;
+    }
 }

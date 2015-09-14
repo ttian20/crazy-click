@@ -43,20 +43,21 @@ class TradeModel extends Model {
     }
 
     public function createNew($params) {
+        $current = time();
         $data = array(
             'id' => $this->_genTradeId(),
-            'passport_id' => '1',
-            'product_id' => '1',
-            'product_title' => '1',
-            'status' => '',
-            'financial_status' => '',
-            'total_price' => '0.01',
-            'created_at' => time(),
-            'updated_at' => time(),
+            'passport_id' => $params['passport_id'],
+            'product_id' => $params['product_id'],
+            'product_title' => $params['product_title'],
+            'status' => isset($params['status']) ? $params['status'] : 'active',
+            'financial_status' => isset($params['financial_status']) ? $params['financial_status'] : 'pending',
+            'total_price' => $params['total_price'],
+            'created_at' => isset($params['created_at']) ? $params['created_at'] : $current,
+            'updated_at' => isset($params['updated_at']) ? $params['updated_at'] : $current,
         );
 
         $res = $this->add($data); 
-        echo $this->getDbError();
+        return $data;
     }
 
     private function _genTradeId() {

@@ -19,6 +19,9 @@ class IndexController extends Controller {
         $res = $passportMdl->verify($p['loginname'], $p['password']);
         if ('success' == $res['status']) {
             //写session
+            session('passport', $res['data']['passport']);
+            $this->redirect('/home/product/lists');
+            exit;
         }
         else {
             $this->redirect('/login?err=' . $res['msg']);

@@ -5,17 +5,8 @@
     <div class="title font_green">购买点卡</div>
     <div class="demo">
       <{foreach item=p from=$products}>
-      <div class="dklist dkyellow"><dl><span><{$p.title}></span></dl><dt><span><{$p.price}>元</span></dt><dd><a href="" class="blue_01">立即购买</a></dd></div>
+      <div class="dklist dkyellow" data-id="<{$p.id}>"><dl><span><{$p.title}></span></dl><dt><span><{$p.price}>元</span></dt><dd><a href="/home/product/buy/<{$p.id}>" class="blue_01 buybtn" target="_blank">立即购买</a></dd></div>
       <{/foreach}>
-      <{*
-      <div class="dklist dkyellow"><dl><span>流量宝点卡</span>2000点</dl><dt><span>500元</span>五折最优</dt><dd><a href="" class="blue_01">立即购买</a></dd></div>
-      <div class="dklist dkgreen"><dl><span>流量宝点卡</span>200点</dl><dt><span>1000元</span>五折最优</dt><dd><a href="" class="blue_01">立即购买</a></dd></div>
-      <div class="dklist dkred"><dl><span>流量宝点卡</span>2000点</dl><dt><span>1000元</span>五折最优</dt><dd><a href="" class="blue_01">立即购买</a></dd></div>
-      <div class="dklist dkblue"><dl><span>流量宝点卡</span>500点</dl><dt><span>2000元</span>五折最优</dt><dd><a href="" class="blue_01">立即购买</a></dd></div>
-      <div class="dklist dkyellow"><dl><span>流量宝点卡</span>2000点</dl><dt><span>500元</span>五折最优</dt><dd><a href="" class="blue_01">立即购买</a></dd></div>
-      <div class="dklist dkgreen"><dl><span>流量宝点卡</span>200点</dl><dt><span>1000元</span>五折最优</dt><dd><a href="" class="blue_01">立即购买</a></dd></div>
-      <div class="dklist dkred"><dl><span>流量宝点卡</span>2000点</dl><dt><span>1000元</span>五折最优</dt><dd><a href="" class="blue_01">立即购买</a></dd></div>
-      *}>
     </div>
   </div>
     
@@ -24,4 +15,8 @@
     <div class="demo">
       <p>&#8226; 点数在你支付成功后自动充值到您的账户中；<br /><p>&#8226; 支付的过程中，请慢慢操作，不要随意刷新网页。如果支付失败，请重新下单支付；<br /><p>&#8226; 目前支持支付宝、财付通和易宝在线充值，网银在线充值，以及银行汇款支付；<br /><p>&#8226; 请在充值之前确认清楚，如须帮助，请联系客服。《、</div>
   </div>
+<{/block}>
+<{block 'footer_script'}>
+<script type="text/javascript">
+</script>
 <{/block}>
