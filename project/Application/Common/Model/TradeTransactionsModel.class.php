@@ -3,7 +3,7 @@ namespace Common\Model;
 use Think\Model;
 class TradeTransactionsModel extends Model {
 
-    public function getRow($filter,$order='created_at'){
+    public function getRow($filter) {
         $row = $this->where($filter)->order($order)->find();
         return $row;
     }

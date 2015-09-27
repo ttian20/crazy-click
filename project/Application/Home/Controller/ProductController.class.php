@@ -41,6 +41,7 @@ class ProductController extends Controller {
             'status' => 'active',
             'financial_status' => 'pending',
             'total_price' => $product['price'],
+            'total_clicks' => $product['clicks'],
             'created_at' => $current,
             'updated_at' => $current,
         );

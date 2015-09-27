@@ -98,29 +98,92 @@ class AlipayController extends CommonController {
         //计算得出通知验证结果
         $alipayNotify = new \AlipayNotify($alipay_config);
         $verify_result = $alipayNotify->verifyReturn();
-        if ($verify_result) {//验证成功
-        	//请在这里加上商户的业务逻辑程序代码
-        	
-        	//——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
-            //获取支付宝的通知返回参数，可参考技术文档中页面跳转同步通知参数列表
-        
+        if ($verify_result) {
+            //验证成功
         	//商户订单号
         	$out_trade_no = $_GET['out_trade_no'];
-        
+            $trans_id = $out_trade_no;
         	//支付宝交易号
         	$trade_no = $_GET['trade_no'];
-        
+            //付款方信息
+            $paid_account = $_GET['buyer_email'];
+            //支付时间
+            $paid_at = strtotime($_GET['notify_time']);
         	//交易状态
         	$trade_status = $_GET['trade_status'];
+            $trans_mdl = D('TradeTransactions');
+            $trade_mdl = D('Trade');
+
+            $trans_filter = array('trans_id' => $trans_id);
+            $trans = $trans_mdl->getRow($trans_filter);
+            if (!$trans) {
+        	    echo "订单不存在<br />";
+                exit;
+            }
+            else {
+                $trade_filter = array('id' => $trans['trade_id']);
+                $trade = $trade_mdl->getRow($trade_filter);
+            }
         
-        
-            if($_GET['trade_status'] == 'TRADE_FINISHED' || $_GET['trade_status'] == 'TRADE_SUCCESS') {
+            if ($_GET['trade_status'] == 'TRADE_FINISHED' || $_GET['trade_status'] == 'TRADE_SUCCESS') {
         		//判断该笔订单是否在商户网站中已经做过处理
+                if ('success' == $trans['status']) {
+                    echo "不做处理";
+                    exit;
+                }
+
+                //更新transaction
+                $trans_mdl->startTrans()；
+                $trans_data = array(
+                    'status' => 'success',
+                    'batch_no' => $trade_no,
+                    'paid_account' => $paid_account,
+                    'paid_at' => $paid_at,
+                    'updated_at' => time(),
+                );
+                $res = $trans_mdl->where("id='{$trans['id']}'")->save($trans_data);
+                \Common\Lib\Utils::log('alipay', 'return.log', $trans_mdl->getLastSql());
+
+                if (false === $res) {
+                    $trans_mdl->rollback();
+                    exit('更新失败');
+                }
+
+                //更新trade
+                $trade_data = array(
+                    'financial_status' => 'paid',
+                    'paid_at' => $paid_at,
+                    'updated_at' => time(),
+                )
+                $res = $trade_mdl->where("id='{$trade['id']}'")->save($trade_data);
+                \Common\Lib\Utils::log('alipay', 'return.log', $trans_mdl->getLastSql());
+
+                //计入点击账户
+                //查询账户是否存在
+                $click_account_mdl = D('ClickAccount');
+                $click_account = $click_account_mdl->getRow(array('passport_id' => $trade['passport_id']));
+                if ($click_account) {
+                    $sql = sprintf("UPDATE click_account SET clicks = clicks + %d WHERE id = %d", $trade['total_clicks'], $click_account['id']);
+                    $res = $click_account_mdl->execute($sql);
+                    \Common\Lib\Utils::log('alipay', 'return.log', $click_account_mdl->getLastSql());
+                }
+                else {
+                    $click_account_data = array(
+                        'passport_id' => $trade['passport_id'],
+                        'clicks' => $trade['total_clicks'],
+                    );
+                    $click_account_mdl->createNew($click_account_data);
+                }
+
+                //点击账户异动日志
+
+
+
         			//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
         			//如果有做过处理，不执行商户的业务程序
             }
             else {
-              echo "trade_status=".$_GET['trade_status'];
+                echo "trade_status=".$_GET['trade_status'];
             }
         		
         	echo "验证成功<br />";
