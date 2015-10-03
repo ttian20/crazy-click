@@ -133,7 +133,7 @@ class AlipayController extends CommonController {
                 }
 
                 //更新transaction
-                $trans_mdl->startTrans()；
+                $trans_mdl->startTrans();
                 $trans_data = array(
                     'status' => 'success',
                     'batch_no' => $trade_no,
@@ -154,7 +154,7 @@ class AlipayController extends CommonController {
                     'financial_status' => 'paid',
                     'paid_at' => $paid_at,
                     'updated_at' => time(),
-                )
+                );
                 $res = $trade_mdl->where("id='{$trade['id']}'")->save($trade_data);
                 \Common\Lib\Utils::log('alipay', 'return.log', $trans_mdl->getLastSql());
 
@@ -166,31 +166,35 @@ class AlipayController extends CommonController {
                     $sql = sprintf("UPDATE click_account SET clicks = clicks + %d WHERE id = %d", $trade['total_clicks'], $click_account['id']);
                     $res = $click_account_mdl->execute($sql);
                     \Common\Lib\Utils::log('alipay', 'return.log', $click_account_mdl->getLastSql());
+                    $click_account = $click_account_mdl->getRow(array('passport_id' => $trade['passport_id']));
                 }
                 else {
                     $click_account_data = array(
                         'passport_id' => $trade['passport_id'],
                         'clicks' => $trade['total_clicks'],
                     );
-                    $click_account_mdl->createNew($click_account_data);
+                    $click_account = $click_account_mdl->createNew($click_account_data);
+                    \Common\Lib\Utils::log('alipay', 'return.log', $click_account_mdl->getLastSql());
                 }
 
                 //点击账户异动日志
+                $click_account_log_mdl = D('ClickAccountLog');
+                $des = array('product_id' => $trade['product_id'], 'trade_id' => $trade['id']);
+                $log_params = array(
+                    'passport_id' => $trade['passport_id'],
+                    'changed_clicks' => $trade['total_clicks'],
+                    'balance_clicks' => $click_account['clicks'],
+                    'description' => json_encode($des),
+                );
+                $log = $click_account_log_mdl->createNew($log_params);
+                \Common\Lib\Utils::log('alipay', 'return.log', $click_account_log_mdl->getLastSql());
+                $trans_mdl->commit();
 
-
-
-        			//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-        			//如果有做过处理，不执行商户的业务程序
+        	    echo "验证成功<br />";
             }
             else {
                 echo "trade_status=".$_GET['trade_status'];
             }
-        		
-        	echo "验证成功<br />";
-        
-        	//——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
-        	
-        	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }
         else {
             //验证失败
