@@ -13,8 +13,11 @@ class Utils
         return $str;
     }
 
-    public function pagination($count,$limit=10, $parameter = array()) {
-        $Page = new \Common\Lib\Pagination((int)$count,$limit, $parameter);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+    public function pagination($count, $limit=10, $parameter = array()) {
+        if ($count < $limit) {
+            return '';
+        }
+        $Page = new \Common\Lib\Pagination((int)$count, $limit, $parameter);// 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show = $Page->show();// 分页显示输出
         return $show;
     } 

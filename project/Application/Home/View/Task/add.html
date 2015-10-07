@@ -1,0 +1,77 @@
+<{extends '../Layouts/default.html'}>
+
+<{block 'content'}>
+<div class="bshop_location width_max"><div class="width_thousand"><a class="blue_01" href="">首页</a> &gt; <a class="blue_01" href="">编辑任务</a> &gt; <a class="blue_01" href="">聚划算流量
+</a></div></div>
+
+<div class="edittask width970">
+    <form name="taskadd" id="taskadd" method="post" action="/home/task/doadd">
+    <input type="hidden" name="platform" value="<{$smarty.get.platform}>">
+    <div class="title font16 font_green bold">基础设置</div>
+    <div class="demo">
+      <table cellspacing="0" cellpadding="0">
+        <tbody><tr>
+          <td width="40">店铺：</td>
+          <td><select name="">
+            <option selected="selected">店铺名字1</option>
+            <option>店铺名字2</option>
+          </select></td>
+          <td width="55">关键词：</td>
+          <td><input type="text" style="width:180px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name="kwd"></td>
+          <td width="55">宝贝ID：</td>
+          <td><input type="text" style="width:180px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name="nid"></td>
+        </tr>
+      </tbody></table>
+    </div>
+    <div class="title font16 font_green bold">流量计划</div>
+    <div class="demo">
+      <table cellspacing="0" cellpadding="0">
+        <tbody><tr>
+          <td width="40">日期：</td>
+          <td><input type="text" style="width:100px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name="begin_time"></td>
+          <td width="40">数量：</td>
+          <td><input type="text" style="width:100px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name="times"></td>
+          <td width="65">开始时间：</td>
+          <td><input type="text" style="width:100px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name="click_start"></td>
+          <td width="65">结束时间：</td>
+          <td><input type="text" style="width:100px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name="click_end"></td>
+        </tr>
+        <{*
+        <tr>
+          <td width="40">日期：</td>
+          <td><input type="text" style="width:100px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name=""></td>
+          <td width="40">数量：</td>
+          <td><input type="text" style="width:100px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name=""></td>
+          <td width="65">开始时间：</td>
+          <td><input type="text" style="width:100px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name=""></td>
+          <td width="65">结束时间：</td>
+          <td><input type="text" style="width:100px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name=""></td>
+        </tr>
+        <tr><td colspan="8"><input type="button" style="border:1px solid #a4bc86;background:#dbe8ca;color:#5a733b; font:12px '微软雅黑'; cursor:pointer;width:90px;height:22px;" value="继续添加" name=""></td></tr>
+        *}>
+        <tr><td colspan="8"><input type="submit" style="border:none;background:#5a733b; cursor:pointer;width:140px;font:14px '微软雅黑';color:#fff;height:36px;" value="保存计划" name="">&nbsp;&nbsp;&nbsp;&nbsp;<{*<input type="button" style="border:none;background:#c9c9c9; cursor:pointer;width:140px;font:14px '微软雅黑';color:#666;height:36px;" value="取消计划" name="">*}></td></tr>
+      </tbody></table>
+    </div>
+    </form>
+  </div>
+<{/block}>
+
+<{block 'footer_script'}>
+<script type="text/javascript">
+$(function(){
+    $('#taskadd').submit(function(e){
+        e.preventDefault();
+        $.post("/home/task/doadd", $("#taskadd").serialize(), function(result){
+            if ('fail' == result.status) {
+                alert(result.msg);
+            }
+            else {
+                if (result.data.redirect_url) {
+                    location.href = result.data.redirect_url;
+                }
+            }
+        }, "json");
+    });       
+});
+</script>
+<{/block}>

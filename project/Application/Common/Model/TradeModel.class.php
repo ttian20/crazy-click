@@ -52,6 +52,7 @@ class TradeModel extends Model {
             'status' => isset($params['status']) ? $params['status'] : 'active',
             'financial_status' => isset($params['financial_status']) ? $params['financial_status'] : 'pending',
             'total_price' => $params['total_price'],
+            'total_clicks' => $params['total_clicks'],
             'created_at' => isset($params['created_at']) ? $params['created_at'] : $current,
             'updated_at' => isset($params['updated_at']) ? $params['updated_at'] : $current,
         );

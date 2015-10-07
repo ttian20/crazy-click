@@ -22,6 +22,7 @@ class ClickAccountLogModel extends Model {
         $data = array(
             'passport_id' => $params['passport_id'],
             'type' => '',
+            'changed_type' => $params['changed_type'],
             'changed_clicks' => $params['changed_clicks'],
             'balance_clicks' => $params['balance_clicks'],
             'description' => $params['description'],

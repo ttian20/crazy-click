@@ -1,12 +1,10 @@
 <?php
 namespace Home\Controller;
-use Think\Controller;
-class ProductController extends Controller {
-    protected $_passport;
+use Home\Controller\CommonController;
+class ProductController extends CommonController {
 
     public function __construct() {
         parent::__construct();
-        $this->_passport = session('passport');
     }
 
     public function index() {
@@ -26,6 +24,7 @@ class ProductController extends Controller {
             exit('error link');
         }
         $product = $productMdl->getRow(array('id' => $_GET['pid']));
+        \Common\Lib\Utils::log('product', 'buy.log', $product);
 
         if (!$product) {
             exit('error product');
@@ -45,6 +44,7 @@ class ProductController extends Controller {
             'created_at' => $current,
             'updated_at' => $current,
         );
+        \Common\Lib\Utils::log('product', 'buy.log', $data);
 
         $trade = $tradeMdl->createNew($data);
 
@@ -66,7 +66,7 @@ class ProductController extends Controller {
         $sHtml.= "<input type='hidden' name='out_trade_no' value='" . $trans['trans_id'] . "'/>";
         $sHtml.= "<input type='hidden' name='subject' value='" . $trade['product_title'] . "'/>";
         $sHtml.= "<input type='hidden' name='total_fee' value='" . $trade['total_price'] . "'/>";
-        $sHtml.= "<input type='hidden' name='body' value='" . $product['description'] . "'/>";
+        $sHtml.= "<input type='hidden' name='body' value='" . strip_tags($product['description']) . "'/>";
         $sHtml.= "<input type='hidden' name='show_url' value='http://www.shopflow.cn/home/product/lists' />";
 
 		//submit按钮控件请不要含有name属性

@@ -19,7 +19,9 @@ class IndexController extends Controller {
         $res = $passportMdl->verify($p['loginname'], $p['password']);
         if ('success' == $res['status']) {
             //写session
-            session('passport', $res['data']['passport']);
+            $passport = $res['data']['passport'];
+            unset($passport['password'], $passport['salt']);
+            session('passport', $passport);
             $this->redirect('/home/product/lists');
             exit;
         }
@@ -64,6 +66,7 @@ class IndexController extends Controller {
 
         $passport = $passportMdl->createNew($p);
         if ($passport) {
+            unset($passport['password']);
             $this->_setLoginSession($passport);
             echo json_encode(array('status' => 'success', 'data' => array('redirect_url' => '/')));
             exit;
@@ -75,7 +78,8 @@ class IndexController extends Controller {
     }
 
     public function logout() {
-        $this->display();
+        session('passport', null);
+        $this->redirect('/login');
     }
 
     private function _setLoginSession($passport) {

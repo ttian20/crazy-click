@@ -99,6 +99,6 @@ class Pagination extends Page{
             array('%HEADER%', '%NOW_PAGE%', '%UP_PAGE%', '%DOWN_PAGE%', '%FIRST%', '%LINK_PAGE%', '%END%', '%TOTAL_ROW%', '%TOTAL_PAGE%'),
             array($this->config['header'], $this->nowPage, $up_page, $down_page, $the_first, $link_page, $the_end, $this->totalRows, $this->totalPages),
             $this->config['theme']);
-        return "<div class='pagination'><ul>{$page_str}</li></div>";
+        return "<div class='pagination'><ul>{$page_str}</ul></div>";
     }
 }

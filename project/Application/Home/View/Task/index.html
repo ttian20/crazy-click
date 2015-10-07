@@ -1,0 +1,97 @@
+<{extends '../Layouts/default.html'}>
+
+<{block 'content'}>
+  <div class="qstion width_thousand">
+    <div class="qstion_list">
+      <div class="title font14 font_green bold">系统公告</div>
+      <div class="demo">
+        <li><a href="" class="gay2">· 点击网址设置中增加批量设置点击，UA设置中增加了分辨率设置</a></li>
+        <li><a href="" class="gay2">· 增加从流量宝软件上导入任务到会员系统</a></li>
+        <li><a href="" class="gay2">· 流量宝VIP会员系统升级</a></li>
+      </div>
+    </div>
+    <div class="qstion_list">
+      <div class="title font14 font_green bold">常见问题</div>
+      <div class="demo">
+        <li><a href="" class="gay2">· 点击网址设置中增加批量设置点击，UA设置中增加了分辨率设置</a></li>
+        <li><a href="" class="gay2">· 增加从流量宝软件上导入任务到会员系统</a></li>
+        <li><a href="" class="gay2">· 流量宝VIP会员系统升级</a></li>
+      </div>
+    </div>
+  </div>
+    
+  <div class="taskmanage width970">
+    <div class="establish">
+    <form name="taskadd" method="get" action="/home/task/add">
+    <table cellpadding="0" cellspacing="0">
+      <tr class="tabtitlebg font14 font_blue01">
+        <td class="bold font_green" width="80" style="padding-left:20px;">创建任务</td>
+        <td width="400">        
+              <input type="radio" name="platform" value="tbpc" id="RadioGroup1_0" checked="checked" />淘宝搜索
+              <input type="radio" name="platform" value="tmpc" id="RadioGroup1_1" />天猫搜索
+              <{*<input type="radio" name="platform" value="tbad" id="RadioGroup1_2" />直通车*}>
+              <{*<input type="radio" name="platform" value="ju" id="RadioGroup1_3" />聚划算*}>
+              <input type="radio" name="platform" value="jdpc" id="RadioGroup1_4" />京东搜索
+        </td>
+        <td><input type="submit" value="创建" name=""  style="border:none;display:block;background:#5a733b; cursor:pointer;width:70px;font:14px '微软雅黑';color:#fff;height:26px;"/></td>
+        <td><{*<select name="">
+          <option>进行中</option>
+  </select>*}></td>
+  <td align="right" style="padding-right:10px;"><{*<input type="button" value="批量删除" name=""  style="border:1px solid #959595;display:block;background:#fff; cursor:pointer;width:70px;font:12px '微软雅黑';color:#666;height:24px;"/>*}></td>
+      </tr>
+    </table></form></div>
+    
+    <div class="tab">
+      <li id="active"><span class="font14 bold"><a href="">全部任务</a></span></li>
+      <li><span><a href="">淘宝搜</a></span></li>
+      <li><span><a href="">天猫搜索</a></span></li>
+      <li><span><a href="">直通车</a></span></li>
+      <li><span><a href="">聚划算</a></span></li>
+      <li><span><a href="">京东搜索</a></span></li>
+    </div>
+    <div class="list">
+      <table cellpadding="0" cellspacing="0">
+        <tr class="tabtrbg02">
+          <td>&nbsp;</td>
+          <td>任务类型</td>
+          <td>关键词</td>
+          <td>店铺类型</td>
+          <td>宝贝ID</td>
+          <td>预设流量</td>
+          <td>有效期</td>
+          <td>状态</td>
+          <td>已点击</td>
+          <td>任务控制</td>
+        </tr>
+        <{foreach item=t from=$tasks}>
+        <tr class="tabtrbg01">
+          <td align="right"><input type="checkbox" name="CheckboxGroup1" value="复选框" /></td>
+          <td>淘宝搜索</td>
+          <td><{$t.kwd}></td>
+          <td>淘宝</td>
+          <td><{$t.nid}></td>
+          <td><{$t.times}></td>
+          <td><{$t.begin_time|date_format:"%Y.%m.%d"}>-<{$t.end_time|date_format:"%Y.%m.%d"}></td>
+          <td class="font_orange bold"><{$t.status}></td>
+          <td>点击查看</td>
+          <td width="150"><a href="" class="yellow">删除</a><a href="" class="yellow">编辑</a><a href="" class="yellow">延期</a><a href="" class="yellow">详情</a></td>
+        </tr>
+        <{/foreach}>
+      </table>
+    </div>
+    
+      <!--下一页-->
+  <{$page}>
+  <{*
+  <div class="dede_pages">
+        <ul>
+            <li class="thisclass">1</li><li><a href="../../js/jiaodiantu-p2.html">2</a></li><li><a href="../../js/jiaodiantu-p3.html">3</a></li><li><a href="../../js/jiaodiantu-p4.html">4</a></li><li><a href="../../js/jiaodiantu-p5.html">5</a></li><li><a href="../../js/jiaodiantu-p6.html">6</a></li><li><a href="../../js/jiaodiantu-p7.html">7</a></li><li><a href="../../js/jiaodiantu-p8.html">8</a></li><li><a href="../../js/jiaodiantu-p9.html">9</a></li><li><a href="../../js/jiaodiantu-p2.html">下一页</a></li><li><a href="../../js/jiaodiantu-p10.html">></a></li>
+        </ul>
+    </div>
+    *}> 
+  </div>
+<{/block}>
+<{block 'footer_script'}>
+<script type="text/javascript">
+</script>
+<{/block}>
