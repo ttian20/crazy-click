@@ -16,7 +16,7 @@ class TradeModel extends Model {
         return $trade_count;
     }
 
-    public function getList($filter, $limit=10, $page=1, $order='created_at desc'){
+    public function getLists($filter, $limit=10, $page=1, $order='created_at desc'){
         $tradelists = $this->where($filter)->order($order)->limit($limit)->page($page)->select();
         $trades = array();
         if ($tradelists) {

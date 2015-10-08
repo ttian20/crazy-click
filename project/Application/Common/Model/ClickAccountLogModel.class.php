@@ -7,6 +7,14 @@ class ClickAccountLogModel extends Model {
         return $row;
     }
 
+    public function getCount($filter){
+        $count = $this->where($filter)->count();
+        if(!$count){
+            $count = 0;
+        }
+        return $count;
+    }
+
     public function getLists($filter, $page = 1, $limit = 10, $order = 'updated_at desc') {
         $rows = $this->where($filter)->limit($limit)->page($page)->order($order)->select();
         return $rows;

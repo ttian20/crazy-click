@@ -21,7 +21,7 @@ class TaskController extends CommonController {
         else {
             $page = intval($_GET['p']);
         }
-        $tasks = $tasks_mdl->getList($tasks_filter);
+        $tasks = $tasks_mdl->getLists($tasks_filter);
         $this->assign('page', $pagination);
         $this->assign('tasks', $tasks);
         $this->display();

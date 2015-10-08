@@ -16,7 +16,7 @@ class TasksModel extends Model {
         return $count;
     }
 
-    public function getList($filter, $page=1, $limit=10, $order='created_at desc'){
+    public function getLists($filter, $page=1, $limit=10, $order='created_at desc'){
         $lists = $this->where($filter)->order($order)->limit($limit)->page($page)->select();
         return $lists;
     }
