@@ -1,5 +1,17 @@
 <{extends '../Layouts/default.html'}>
 
+<{block 'style'}>
+<link href="/src/css/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="/src/jQuery-Timepicker-Addon/jquery-ui-timepicker-addon.css" rel="stylesheet" type="text/css" />
+<{/block}>
+
+<{block 'header_script'}>
+<script type="text/javascript" src="/src/js/jquery-ui.min.js"></script>
+<{*<script type="text/javascript" src="/src/jQuery-Timepicker-Addon/jquery-ui-timepicker-addon.js"></script>*}>
+<script type="text/javascript" src="/src/js/jquery.ui.datepicker-zh-CN.js"></script>
+<{*<script type="text/javascript" src="/src/js/jquery-ui-timepicker-zh-CN.js"></script>*}>
+<{/block}>
+
 <{block 'content'}>
   <div class="qstion width_thousand">
     <div class="qstion_list">
@@ -27,16 +39,15 @@
         <tbody><tr>
           <td>发生时间：</td>
           <td>从</td>
-          <td><input type="text" style="width:100px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name=""></td>
+          <td><input type="text" style="width:100px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name="start_date" id="start_date"></td>
           <td>到</td>
-          <td><input type="text" style="width:100px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name=""></td>
+          <td><input type="text" style="width:100px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name="end_date" id="end_date"></td>
           <td>点数类型：</td>
           <td><select name="">
             <option selected="selected">所有类型</option>
           </select></td>
           <td>编号：</td>
-          <td><input type="text" style="width:100px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name=""></td>
-          <td><input type="button" style="border:1px solid #a4bc86;background:#dbe8ca;color:#5a733b; font:12px '微软雅黑'; cursor:pointer;width:60px;height:22px;" value="添加" name=""></td>
+          <td><input type="submit" style="border:1px solid #a4bc86;background:#dbe8ca;color:#5a733b; font:12px '微软雅黑'; cursor:pointer;width:60px;height:22px;" value="查询" name=""></td>
         </tr>
       </tbody></table>
     </div>
@@ -72,4 +83,13 @@
     </div>
   <{$page}>
   </div>
+<{/block}>
+
+<{block 'footer_script'}>
+<script type="text/javascript">
+$(function(){
+    $('#start_date').datepicker();
+    $('#end_date').datepicker();
+});
+</script>
 <{/block}>
