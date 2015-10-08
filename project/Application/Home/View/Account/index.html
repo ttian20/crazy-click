@@ -1,0 +1,83 @@
+<{extends '../Layouts/default.html'}>
+
+<{block 'content'}>
+  <div class="qstion width_thousand">
+    <div class="qstion_list">
+      <div class="title font14 font_green bold">系统公告</div>
+      <div class="demo">
+        <li><a href="" class="gay2">· 点击网址设置中增加批量设置点击，UA设置中增加了分辨率设置</a></li>
+        <li><a href="" class="gay2">· 增加从流量宝软件上导入任务到会员系统</a></li>
+        <li><a href="" class="gay2">· 流量宝VIP会员系统升级</a></li>
+      </div>
+    </div>
+    <div class="qstion_list">
+      <div class="title font14 font_green bold">常见问题</div>
+      <div class="demo">
+        <li><a href="" class="gay2">· 点击网址设置中增加批量设置点击，UA设置中增加了分辨率设置</a></li>
+        <li><a href="" class="gay2">· 增加从流量宝软件上导入任务到会员系统</a></li>
+        <li><a href="" class="gay2">· 流量宝VIP会员系统升级</a></li>
+      </div>
+    </div>
+  </div>
+
+  <div class="zhanghu width970">
+    <div class="title"><span class="bold">账户点数记录查询</span></div>
+    <div class="time">
+      <table cellspacing="0" cellpadding="0">
+        <tbody><tr>
+          <td>发生时间：</td>
+          <td>从</td>
+          <td><input type="text" style="width:100px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name=""></td>
+          <td>到</td>
+          <td><input type="text" style="width:100px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name=""></td>
+          <td>点数类型：</td>
+          <td><select name="">
+            <option selected="selected">所有类型</option>
+          </select></td>
+          <td>编号：</td>
+          <td><input type="text" style="width:100px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name=""></td>
+          <td><input type="button" style="border:1px solid #a4bc86;background:#dbe8ca;color:#5a733b; font:12px '微软雅黑'; cursor:pointer;width:60px;height:22px;" value="添加" name=""></td>
+        </tr>
+      </tbody></table>
+    </div>
+    <div class="num">
+      <table cellspacing="0" cellpadding="0">
+        <tbody><tr>
+          <td width="150">账户余额：<font class="font14 bold font_orange">0.00</font>点</td>
+          <td width="150">累计充值：<font class="font14 bold font_orange">0.00</font>点</td>
+          <td width="150">累计消耗：<font class="font14 bold font_orange">0.00</font>点</td>
+          <td><input type="button" style="border:1px solid #ff9900;background:#ffffcc;color:#f60; font:12px '微软雅黑'; cursor:pointer;width:80px;height:24px;" value="我要充值" name=""></td>
+        </tr>
+      </tbody></table>
+    </div>
+    <div class="list">
+      <table cellspacing="0" cellpadding="0">
+        <tbody><tr class="font14 font_blue01 tabtitlebg">
+          <td style="border-bottom:1px solid #959595;">序号</td>
+          <td style="border-bottom:1px solid #959595;">发生时间</td>
+          <td style="border-bottom:1px solid #959595;">点数类型</td>
+          <td style="border-bottom:1px solid #959595;">点数收支</td>
+          <td style="border-bottom:1px solid #959595;">可用点数</td>
+          <td style="border-bottom:1px solid #959595;">备注</td>
+        </tr>
+        <tr class="tabtrbg01">
+          <td>1215454</td>
+          <td>2015-06-01</td>
+          <td>点数类型</td>
+          <td>235</td>
+          <td>3254</td>
+          <td>免费刷流量软件</td>
+        </tr>
+        <tr class="tabtrbg02">
+          <td>1215454</td>
+          <td>2015-06-01</td>
+          <td>点数类型</td>
+          <td>235</td>
+          <td>3254</td>
+          <td>免费刷流量软件</td>
+        </tr>
+      </tbody></table>
+    </div>
+  <{$page}>
+  </div>
+<{/block}>
