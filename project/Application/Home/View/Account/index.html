@@ -53,29 +53,21 @@
     <div class="list">
       <table cellspacing="0" cellpadding="0">
         <tbody><tr class="font14 font_blue01 tabtitlebg">
-          <td style="border-bottom:1px solid #959595;">序号</td>
           <td style="border-bottom:1px solid #959595;">发生时间</td>
-          <td style="border-bottom:1px solid #959595;">点数类型</td>
+          <td style="border-bottom:1px solid #959595;">变化原因</td>
           <td style="border-bottom:1px solid #959595;">点数收支</td>
-          <td style="border-bottom:1px solid #959595;">可用点数</td>
+          <td style="border-bottom:1px solid #959595;">点数余额</td>
           <td style="border-bottom:1px solid #959595;">备注</td>
         </tr>
+        <{foreach item=l from=$logs}>
         <tr class="tabtrbg01">
-          <td>1215454</td>
-          <td>2015-06-01</td>
-          <td>点数类型</td>
-          <td>235</td>
-          <td>3254</td>
-          <td>免费刷流量软件</td>
+          <td><{$l.created_at|date_format:"%Y-%m-%d %H:%M:%S"}></td>
+          <td><{if $l.changed_type eq 'task'}>点击任务消耗<{elseif $l.changed_type eq 'buy'}>购买点卡<{/if}></td>
+          <td><{if $l.changed_clicks > 0}>+<{else}><{/if}><{$l.changed_clicks}></td>
+          <td><{$l.balance_clicks}></td>
+          <td><{if $l.changed_type eq 'task'}>任务编号:<{$l.des.kid}><{elseif $l.changed_type eq 'buy'}>订单号:<{$l.des.trade_id}><{/if}></td>
         </tr>
-        <tr class="tabtrbg02">
-          <td>1215454</td>
-          <td>2015-06-01</td>
-          <td>点数类型</td>
-          <td>235</td>
-          <td>3254</td>
-          <td>免费刷流量软件</td>
-        </tr>
+        <{/foreach}>
       </tbody></table>
     </div>
   <{$page}>

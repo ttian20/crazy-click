@@ -17,6 +17,13 @@ class ClickAccountLogModel extends Model {
 
     public function getLists($filter, $page = 1, $limit = 10, $order = 'updated_at desc') {
         $rows = $this->where($filter)->limit($limit)->page($page)->order($order)->select();
+        if ($rows) {
+            foreach ($rows as $k => &$v) {
+                if ($v['description']) {
+                    $v['des'] = json_decode($v['description'], true);
+                }
+            }
+        }
         return $rows;
     }
 

@@ -5,7 +5,7 @@
   <div class="header width_max"><div class="width_thousand">
     <div class="nav_user">
       <dl><a href="" title="QQ在线咨询" style="background:url(images/btn003.jpg);width:130px;height:44px;"></a><a href="" title="收费标准" style="background:url(images/btn002.jpg);width:50px;height:44px;" class="popbox-link"></a></dl>
-      <dt><a href="/home/task" class="blue_01">任务管理</a>｜<a href="/home/account" class="blue_01">账户管理</a>｜<a href="" class="orange bold">帐户充值</a>｜<a href="" class="blue_01">常见问题</a>｜<a href="" class="blue_01">邀请返利</a><{if $passport}>｜<a href="/logout" class="blue_01">退出登录</a><{/if}></dt></div>
+      <dt><a href="/home/task" class="<{if $controllerName eq 'task'}>orange bold<{else}>blue_01<{/if}>">任务管理</a>｜<a href="/home/account" class="<{if $controllerName eq 'account'}>orange bold<{else}>blue_01<{/if}>">账户管理</a>｜<a href="/home/product/lists" class="<{if $controllerName eq 'product'}>orange bold<{else}>blue_01<{/if}>">帐户充值</a>｜<a href="" class="blue_01">常见问题</a>｜<a href="" class="blue_01">邀请返利</a><{if $passport}>｜<a href="/logout" class="blue_01">退出登录</a><{/if}></dt></div>
     <div class="logo"><a href="/"></a></div>
     <div class="kouhao denone">专业流量提供商</div>
   </div></div>

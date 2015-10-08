@@ -11,7 +11,8 @@ class AccountController extends CommonController {
         $click_account_mdl = D('ClickAccount');
         $click_account_log_mdl = D('ClickAccountLog');
         $filter = array('passport_id' => $this->_passport['id']);
-        $count = $click_account_log_mdl->getCount($filter);
+        $log_filter = array('passport_id' => $this->_passport['id'], 'is_deleted' => 0);
+        $count = $click_account_log_mdl->getCount($log_filter);
         $click_account = $click_account_mdl->getRow($filter);
 
         $utils = new \Common\Lib\Utils();
@@ -23,7 +24,7 @@ class AccountController extends CommonController {
         else {
             $page = intval($_GET['p']);
         }
-        $logs = $click_account_log_mdl->getLists($filter);
+        $logs = $click_account_log_mdl->getLists($log_filter);
         $this->assign('page', $pagination);
         $this->assign('logs', $logs);
         $this->display();
