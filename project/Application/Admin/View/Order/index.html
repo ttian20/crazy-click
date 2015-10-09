@@ -22,7 +22,7 @@
             <tr>
               <td><{$t.trade_trans.trans_id}></td>
               <td><{$t.trade.product_title}></td>
-              <td><{$t.trade.financial_status}></td>
+              <td><{if $t.trade.financial_status eq 'paid'}>已支付<{elseif $t.trade.financial_status eq 'pending'}>待支付<{/if}></td>
               <td><{$t.trade.created_at|date_format:'%Y-%m-%d %H:%M:%S'}></td>
               <td><{if $t.trade.paid_at}><{$t.trade.paid_at|date_format:'%Y-%m-%d %H:%M:%S'}><{else}>-<{/if}></td>
             </tr>
