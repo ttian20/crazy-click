@@ -18,13 +18,13 @@
             </tr>
           </thead>
           <tbody>
-            <{foreach item=u from=$users}>
+            <{foreach item=p from=$passports}>
             <tr>
-              <td><{$u.loginname}></td>
-              <td><{$u.qq}></td>
-              <td><{$u.mobile}></td>
-              <td><{$u.email}></td>
-              <td><{$u.created_at|date_format:'%Y-%m-%d %H:%M:%S'}></td>
+              <td><{$p.loginname}></td>
+              <td><{$p.qq}></td>
+              <td><{$p.mobile}></td>
+              <td><{$p.email}></td>
+              <td><{$p.created_at|date_format:'%Y-%m-%d %H:%M:%S'}></td>
             </tr>
             <{/foreach}>
           </tbody>
