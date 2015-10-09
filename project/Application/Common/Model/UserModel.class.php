@@ -10,6 +10,19 @@ class UserModel extends Model {
         return $row;
     }
 
+    public function getCount($filter){
+        $count = $this->where($filter)->count();
+        if (!$count){
+            $count = 0;
+        }
+        return $count;
+    }
+
+    public function getLists($filter, $page=1, $limit=10, $order='created_at desc'){
+        $users = $this->where($filter)->order($order)->limit($limit)->page($page)->select();
+        return $users;
+    }
+
     public function verify($loginname, $password) {
         $filter = array('loginname' => $loginname);
         $rs = $this->getRow($filter);
