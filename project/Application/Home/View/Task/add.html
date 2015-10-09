@@ -1,5 +1,17 @@
 <{extends '../Layouts/default.html'}>
 
+<{block 'style'}>
+<link href="/src/css/jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="/src/jQuery-Timepicker-Addon/jquery-ui-timepicker-addon.css" rel="stylesheet" type="text/css" />
+<{/block}>
+
+<{block 'header_script'}>
+<script type="text/javascript" src="/src/js/jquery-ui.min.js"></script>
+<{*<script type="text/javascript" src="/src/jQuery-Timepicker-Addon/jquery-ui-timepicker-addon.js"></script>*}>
+<script type="text/javascript" src="/src/js/jquery.ui.datepicker-zh-CN.js"></script>
+<{*<script type="text/javascript" src="/src/js/jquery-ui-timepicker-zh-CN.js"></script>*}>
+<{/block}>
+
 <{block 'content'}>
 <div class="bshop_location width_max"><div class="width_thousand"><a class="blue_01" href="">首页</a> &gt; <a class="blue_01" href="">编辑任务</a> &gt; <a class="blue_01" href="">聚划算流量
 </a></div></div>
@@ -28,7 +40,7 @@
       <table cellspacing="0" cellpadding="0">
         <tbody><tr>
           <td width="40">日期：</td>
-          <td><input type="text" style="width:100px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name="begin_time"></td>
+          <td><input type="text" style="width:100px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name="begin_time" id="begin_time"></td>
           <td width="40">数量：</td>
           <td><input type="text" style="width:100px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name="times"></td>
           <td width="65">开始时间：</td>
@@ -59,6 +71,7 @@
 <{block 'footer_script'}>
 <script type="text/javascript">
 $(function(){
+    $('#begin_time').datepicker();
     $('#taskadd').submit(function(e){
         e.preventDefault();
         $.post("/home/task/doadd", $("#taskadd").serialize(), function(result){

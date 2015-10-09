@@ -9,14 +9,14 @@ class TradeModel extends Model {
     }
 
     public function getCount($filter){
-        $trade_count = $this->where($filter)->count();
-        if(!$trade_count){
-            $trade_count = 0;
+        $count = $this->where($filter)->count();
+        if (!$count){
+            $count = 0;
         }
-        return $trade_count;
+        return $count;
     }
 
-    public function getLists($filter, $limit=10, $page=1, $order='created_at desc'){
+    public function getLists($filter, $page=1, $limit=10, $order='created_at desc'){
         $tradelists = $this->where($filter)->order($order)->limit($limit)->page($page)->select();
         $trades = array();
         if ($tradelists) {
@@ -25,7 +25,7 @@ class TradeModel extends Model {
             foreach ($tradelists as $key => $tl) {
                 $trades[$key]['trade'] = $tl;
                 $trade_id = $tl['id'];
-                $trades[$key]['trade_tran'] = $tranMdl->getRow(array('trade_id' => $trade_id,'status' => 'success'));
+                $trades[$key]['trade_trans'] = $tranMdl->getRow(array('trade_id' => $trade_id));
             }
         }
         return $trades;

@@ -11,6 +11,11 @@
                 <li ><a href="help.html">Help</a></li>
             </ul>
             *}>
+            <div class="nav-header" data-toggle="collapse" data-target="#orders-menu"><i class="icon-list-alt"></i>订单<span class="label label-info"></span></div>
+            <ul id="orders-menu" class="nav nav-list collapse in">
+              <li<{if $controllerName eq 'order'}> class="active"<{/if}>><a href="/order">订单列表</a></li>
+            </ul>
+
             <div class="nav-header" data-toggle="collapse" data-target="#articles-menu"><i class="icon-briefcase"></i>文章<span class="label label-info">+10</span></div>
             <ul id="articles-menu" class="nav nav-list collapse in">
               <li<{if $controllerName eq 'artcat'}> class="active"<{/if}>><a href="/artcat">文章分类</a></li>
