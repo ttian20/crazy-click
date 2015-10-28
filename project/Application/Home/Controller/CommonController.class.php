@@ -8,7 +8,7 @@ class CommonController extends Controller {
         parent::__construct();
         
         if (!in_array(ACTION_NAME, $this->getLoginExcept()) && !session('passport')) {
-            $this->redirect('/login');
+            $this->redirect('/');
         }
 
         $this->assign('controllerName', strtolower(CONTROLLER_NAME));
