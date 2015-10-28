@@ -3,12 +3,11 @@ namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
     public function index() {
-        $this->display();
-    }
-
-    public function login() {
         if ($_GET['err']) {
             $this->assign('error', $_GET['err']);
+        }
+        if (session('?passport')) {
+            $this->redirect('/home/product/lists');
         }
         $this->display();
     }
@@ -79,7 +78,7 @@ class IndexController extends Controller {
 
     public function logout() {
         session('passport', null);
-        $this->redirect('/login');
+        $this->redirect('/');
     }
 
     private function _setLoginSession($passport) {

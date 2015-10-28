@@ -23,10 +23,11 @@
     <div class="demo">
       <table cellspacing="0" cellpadding="0">
         <tbody><tr>
-          <td width="40">店铺：</td>
-          <td><select name="">
-            <option selected="selected">店铺名字1</option>
-            <option>店铺名字2</option>
+          <td width="60">任务类型:</td>
+          <td><select name="platform" id="platform">
+            <{foreach item=t from=$taskTypes}>
+            <option value="<{$t.value}>"<{if $taskType eq $t.value}> selected<{/if}>><{$t.label}></option>
+            <{/foreach}>
           </select></td>
           <td width="55">关键词：</td>
           <td><input type="text" style="width:180px;border:1px solid #c9c9c9;background:#fff;height:18px;font-size:14px; line-height:18px;" name="kwd"></td>

@@ -24,11 +24,27 @@ class TaskController extends CommonController {
         $tasks = $tasks_mdl->getLists($tasks_filter);
         $this->assign('page', $pagination);
         $this->assign('tasks', $tasks);
+
+        $taskTypes = $this->_getSearchTypes();
+        $this->assign('taskTypes', $taskTypes);
         $this->display();
     }
 
     public function add() {
+        $taskType = $_GET['platform'];
+        $taskTypes = $this->_getSearchTypes();
+        $this->assign('taskTypes', $taskTypes);
+        $this->assign('taskType', $taskType);
         $this->display();
+    }
+
+    protected function _getSearchTypes() {
+        $taskTypes = array(
+            array('label' => '淘宝搜索', 'value' => 'tbpc_c'),
+            array('label' => '天猫搜索', 'value' => 'tbpc_b'),
+            array('label' => '京东搜索', 'value' => 'jdpc'),
+        );
+        return $taskTypes;
     }
 
     public function doAdd() {

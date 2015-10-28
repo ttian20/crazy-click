@@ -27,11 +27,9 @@
       <tr class="tabtitlebg font14 font_blue01">
         <td class="bold font_green" width="80" style="padding-left:20px;">创建任务</td>
         <td width="400">        
-              <input type="radio" name="platform" value="tbpc" id="RadioGroup1_0" checked="checked" />淘宝搜索
-              <input type="radio" name="platform" value="tmpc" id="RadioGroup1_1" />天猫搜索
-              <{*<input type="radio" name="platform" value="tbad" id="RadioGroup1_2" />直通车*}>
-              <{*<input type="radio" name="platform" value="ju" id="RadioGroup1_3" />聚划算*}>
-              <input type="radio" name="platform" value="jdpc" id="RadioGroup1_4" />京东搜索
+            <{foreach item=t from=$taskTypes name=foo}>
+            <input type="radio" name="platform" value="<{$t.value}>"<{if $smarty.foreach.foo.first}> checked="checked"<{/if}> /><{$t.label}>
+            <{/foreach}>
         </td>
         <td><input type="submit" value="创建" name=""  style="border:none;display:block;background:#5a733b; cursor:pointer;width:70px;font:14px '微软雅黑';color:#fff;height:26px;"/></td>
         <td><{*<select name="">
