@@ -43,6 +43,8 @@ class Api
             $signString .= $v;
         }
 
+        \Common\Lib\Utils::log('task', 'add.log', $signString);
+        \Common\Lib\Utils::log('task', 'add.log', $this->appsecret);
         $signString = md5($signString . md5($this->appsecret));
         return strtolower($signString);
     }

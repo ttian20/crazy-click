@@ -86,15 +86,34 @@ class TaskController extends CommonController {
         //请求api
         $api = new \Common\Lib\Api(C('CS_CONFIG'));
 
-        $method = 'tbpc/add';
-        $data = $this->_buildApiData($p);
+        $data = $p;
+        switch ($p['platform']) {
+            case 'tbpc_b':
+                $method = 'tbpc/add';
+                $platform = 'tbpc';
+                $data['shop_type'] = 'b';
+                break;
+            case 'tbpc_c':
+                $method = 'tbpc/add';
+                $platform = 'tbpc';
+                $data['shop_type'] = 'c';
+                break;
+            case 'jdpc':
+                $method = 'jdpc/add';
+                $platform = 'jdpc';
+                $data['shop_type'] = 'b';
+                break;
+        }
+        $data = $this->_buildApiData($platform, $data);
         
         $res = $api->request($method, $data);
+        \Common\Lib\Utils::log('task', 'add.log', $method);
+        \Common\Lib\Utils::log('task', 'add.log', $data);
         \Common\Lib\Utils::log('task', 'add.log', $res);
         if ('success' == $res['status']) {
             $kid = $res['data']['id'];
             //写入tasks
-            $task_data = $this->_buildTaskData($kid, $p);
+            $task_data = $this->_buildTaskData($kid, $platform, $data);
             $task_res = $tasks_mdl->createNew($task_data);
             \Common\Lib\Utils::log('task', 'add.log', $tasks_mdl->getLastSql());
 
@@ -189,19 +208,12 @@ class TaskController extends CommonController {
         exit;
     }
 
-    private function _buildApiData($p) {
+    private function _buildApiData($platform, $p) {
         $data = array(
             'kwd' => trim($p['kwd']),
             'nid' => trim($p['nid']),
-            //'shop_type' => trim($_POST['shop_type']),
-            'shop_type' => 'c',
+            'shop_type' => $p['shop_type'],
             'times' => trim($p['times']),
-            //'path1' => isset($_POST['path1']) ? trim($_POST['path1']) : 0,
-            //'path2' => isset($_POST['path2']) ? trim($_POST['path2']) : 0,
-            //'path3' => isset($_POST['path3']) ? trim($_POST['path3']) : 0,
-            'path1' => 100,
-            'path2' => 0,
-            'path3' => 0,
             'sleep_time' => 20,
             'click_start' => trim($p['click_start']),
             'click_end' => trim($p['click_end']),
@@ -209,17 +221,33 @@ class TaskController extends CommonController {
             'begin_time' => trim($p['begin_time']),
             'end_time' => trim($p['begin_time']),
         );
+        switch ($platform) {
+            case 'tbpc':
+                if ('c' == $p['shop_type']) {
+                    $data['path1'] = 100;
+                    $data['path2'] = 0;
+                    $data['path3'] = 0;
+                }
+                else {
+                    $data['path1'] = 0;
+                    $data['path2'] = 0;
+                    $data['path3'] = 100;
+                }
+                break;
+            case 'jdpc':
+                break;
+        }
         return $data;
     }
 
-    private function _buildTaskData($kid, $p) {
+    private function _buildTaskData($kid, $platform, $p) {
         $data = array(
             'id' => $kid,
             'passport_id' => $this->_passport['id'],
             'kwd' => trim($p['kwd']),
             'nid' => trim($p['nid']),
-            'platform' => 'tbpc',
-            'shop_type' => 'c',
+            'platform' => $platform,
+            'shop_type' => $p['shop_type'],
             'times' => trim($p['times']),
             'begin_time' => strtotime(trim($p['begin_time'])),
             'end_time' => strtotime(trim($p['begin_time'])),
