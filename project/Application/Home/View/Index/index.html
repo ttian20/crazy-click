@@ -22,7 +22,7 @@
   
   <div class="banner width_max"><div class="width_thousand">
     <div class="login">
-      <form action="/verify" method="post">
+      <form action="/verify" method="post" id="loginForm">
       <li><span>用户名：</span><input name="loginname" type="text" style="width:200px;border:none;background:#fff;height:30px;font-size:14px; line-height:30px;"/></li>
       <li><span>密   码 ：</span><input name="password" type="password" style="width:200px;border:none;background:#fff;height:30px;font-size:14px; line-height:30px;"/></li>
       <li><input name="" type="submit" value="" style="border:none;background:url(/src/images/btn001.jpg) no-repeat;width:260px;height:50px; cursor:pointer;" /></li>
@@ -102,6 +102,22 @@
 	<div class="close"><a class="close-btn" href="#"></a></div>
   </div>
   <!--弹框结束-->
-  
+  <script type="text/javascript">
+$(function(){
+    $('#loginForm').submit(function(e){
+        e.preventDefault();
+        $.post("/verify", $("#loginForm").serialize(), function(result){
+            if ('fail' == result.status) {
+                alert(result.msg);
+            }
+            else {
+                if (result.data.redirect_url) {
+                    location.href = result.data.redirect_url;
+                }
+            }
+        }, "json");
+    });
+});
+  </script>
 </body>
 </html>

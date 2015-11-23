@@ -13,6 +13,7 @@ class IndexController extends Controller {
     }
 
     public function verify() {
+        header('Content-type: application/json');
         $p = I("post.");
         $passportMdl = D("Passport");
         $res = $passportMdl->verify($p['loginname'], $p['password']);
@@ -21,16 +22,19 @@ class IndexController extends Controller {
             $passport = $res['data']['passport'];
             unset($passport['password'], $passport['salt']);
             session('passport', $passport);
-            $this->redirect('/home/product/lists');
+            echo json_encode(array('status' => 'success', 'data' => array('redirect_url' => '/home/product/lists')));
             exit;
         }
         else {
-            $this->redirect('/login?err=' . $res['msg']);
+            echo json_encode(array('status' => 'fail', 'msg' => "用户名或密码错误"));
+            exit;
         }
     }
 
     public function register() {
-        $p = I("post.");
+        if (isset($_GET['referrer']) && $_GET['referrer']) {
+            cookie('referrer', trim($_GET['referrer']), 86400*30);
+        }
         $passportMdl = D("Passport");
         $this->display();
     }
@@ -63,7 +67,12 @@ class IndexController extends Controller {
             exit;
         }
 
-        $passport = $passportMdl->createNew($p);
+        $referrer = cookie('referrer');
+        if ($referrer) {
+            $p['spreader_passport_id'] = \Common\Lib\Idhandler::decode($referrer);
+        }
+
+       $passport = $passportMdl->createNew($p);
         if ($passport) {
             unset($passport['password']);
             $this->_setLoginSession($passport);

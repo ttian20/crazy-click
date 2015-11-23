@@ -63,6 +63,9 @@ class PassportModel extends Model {
         if ($params['mobile']) {
             $data['mobile'] = $params['mobile'];
         }
+        if ($params['spreader_passport_id']) {
+            $data['spreader_passport_id'] = $params['spreader_passport_id'];
+        }
         $res = $this->data($data)->add();
         if ($res) {
             $passportId = $res;

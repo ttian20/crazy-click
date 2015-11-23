@@ -9,7 +9,7 @@ class InviteController extends CommonController {
 
     public function index() {
         $encodePassportId = \Common\Lib\Idhandler::encode($this->passport['id']);
-        $inviteUrl = 'http://www.shopflow.cn/register?ref=' . $encodePassportId;
+        $inviteUrl = 'http://www.shopflow.cn/register?referrer=' . $encodePassportId;
         $this->assign('inviteUrl', $inviteUrl);
         $this->display();
     }
